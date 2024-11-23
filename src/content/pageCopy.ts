@@ -13,6 +13,12 @@ export const pageContents = {
         headerParagraph: "Together, we build a stronger, risk-resilient enterprise.",
         catchPhrase: "Minimize Risk"
     },
+    contactPage: {
+        headerText: "Lets talk about your project",
+        bullet: "Find out how we can support",
+        headerParagraph: "Together, we build a stronger, risk-resilient enterprise.",
+        catchPhrase: "Execute Now"
+    },
     staffingPage: {
         headerText: "The Right Tech Talent",
         bullet: "For cyber and information security technical resources",

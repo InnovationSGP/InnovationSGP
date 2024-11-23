@@ -10,6 +10,8 @@ import {TrustedPartners} from "@/app/components/TrustedPartners";
 export default function Security() {
     return (
         <>
+       
+
             <HeroComponent2 headerText={pageContents.securityPage.headerText} bullet={pageContents.securityPage.bullet}
                             catchPhrase={pageContents.securityPage.catchPhrase}
                             headerParagraph={pageContents.securityPage.headerParagraph}/>

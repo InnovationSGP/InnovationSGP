@@ -13,10 +13,10 @@ export default function Delivery() {
             <HeroComponent3 header={pageContents.projectDeliveryPage.headerText} heroImg={deliveryPNG}
                             headerText={pageContents.projectDeliveryPage.headerParagraph}/>
 
-            {/*<Feature2/>*/}
+
             <CardComponent/>
             <BlogCarousel/>
-            {/*<Testimonial2/>*/}
+            
 
         </div>
     );
