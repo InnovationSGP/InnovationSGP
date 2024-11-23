@@ -6,16 +6,22 @@ import {routes} from "@/pages/api/routes/messagesRoutes";
 import {IncomingContactMessages} from "@/lib/types";
 import {BlogCarousel} from "@/app/resources/content/BlogCarousel";
 import ReCAPTCHA from "react-google-recaptcha";
+import {pageContents} from "@/content/pageCopy";
+import HeroComponent2 from "@/app/components/Hero/HeroComponent2";
+import CardComponent from "@/app/components/Card";
 
 function ContactUs() {
     return (
         <div className="">
+            <HeroComponent2 headerText={pageContents.contactPage.headerText} bullet={pageContents.contactPage.bullet}
+                            catchPhrase={pageContents.contactPage.catchPhrase}
+                            headerParagraph={pageContents.contactPage.headerParagraph}/>
             <ContactUsForm/>
+            <CardComponent/>
             <BlogCarousel/>
         </div>
     );
 }
-
 
 export default ContactUs;
 
@@ -58,12 +64,27 @@ function ContactUsForm() {
     };
 
 
-    return <div className="w-full h-[80vh] bg-gray-100 flex items-center justify-center py-4">
-        <div className="relative bg-white drop-shadow-md rounded lg:px-28 px-8">
-            <div className="container mx-auto p-16">
+    return <>
+
+
+        <ContactForm onSubmit={handleSubmit(formSubmit)} register={register("name")}
+                     register1={register("email", {required: true})} register2={register("phone")}
+                     register3={register("message", {required: true})} sitekey={siteKey} onChange={onChange}
+                     captchaIsDone={captchaIsDone}/>
+        ;
+    </>
+
+
+}
+
+function ContactForm(props: { onSubmit: any, register: any, register1: any, register2: any, register3: any, sitekey: string, onChange: () => void, captchaIsDone: boolean }) {
+    return <div className="w-full flex items-center justify-center">
+
+        <div className="relative bg-white rounded lg:px-28 px-8">
+            <div className="container mx-auto ">
                 <div className="lg:flex">
                     <div
-                        className="xl:w-2/5 lg:w-2/5 bg-primaryBlue py-16 xl:rounded-bl rounded-tl rounded-tr xl:rounded-tr-none">
+                        className="xl:w-2/5 shadow-lg border border-gray-200 lg:w-2/5 bg-primaryBlue py-16 xl:rounded-bl rounded-tl rounded-tr xl:rounded-tr-none">
                         <div className="xl:w-5/6 xl:px-0 px-8 mx-auto">
                             <h1 className="xl:text-4xl text-3xl pb-4 text-white font-bold">Get in touch</h1>
                             <p className="text-xl text-white pb-8 leading-relaxed font-normal lg:pr-4">Got a
@@ -102,17 +123,15 @@ function ContactUsForm() {
                                 1170 W 135th St, <br/>
                                 Overland Park, KS 66221
                             </p>
-                            {/*<a href="javascript:void(0)">*/}
-                            {/*    <p className="text-white pt-16 font-bold tracking-wide underline">View Job*/}
-                            {/*        Openings</p>*/}
-                            {/*</a>*/}
+
                         </div>
                     </div>
                     <div
-                        className="xl:w-3/5 lg:w-3/5 bg-gray-200 h-full pt-5 pb-5 xl:pr-5 xl:pl-0 rounded-tr rounded-br">
+                        className="xl:w-3/5 shadow-lg border border-gray-200 lg:w-3/5 bg-white h-full pt-5 pb-5 xl:pr-5 xl:pl-0 rounded-tr rounded-br">
 
 
-                        <form onSubmit={handleSubmit(formSubmit)} className="bg-white py-4 px-8 rounded-tr rounded-br">
+                        <form onSubmit={props.onSubmit}
+                              className="bg-white py-4 px-8 rounded-tr rounded-br">
                             <h1 className="text-4xl text-gray-800 font-extrabold mb-6">Let's Get Connected!</h1>
                             <div className="block xl:flex w-full flex-wrap justify-between mb-6">
                                 <div className="w-2/4 max-w-xs mb-6  xl:mb-0">
@@ -128,7 +147,7 @@ function ContactUsForm() {
                                             required
                                             autoComplete="name"
                                             name="name"
-                                            {...register("name")}
+                                            {...props.register}
                                             className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                                             placeholder="name"/>
                                     </div>
@@ -146,7 +165,7 @@ function ContactUsForm() {
                                                required
                                                autoComplete="email"
                                                name="email"
-                                               {...register("email", {required: true})}
+                                               {...props.register1}
                                                className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                                                placeholder="email"/>
                                     </div>
@@ -166,7 +185,7 @@ function ContactUsForm() {
                                                type="tel"
                                                autoComplete="phone"
                                                name="phone"
-                                               {...register("phone")}
+                                               {...props.register2}
                                                className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                                                placeholder="phone"/>
                                     </div>
@@ -184,7 +203,7 @@ function ContactUsForm() {
                                               role="textbox"
                                               autoComplete="message"
                                               required
-                                              {...register("message", {required: true})}
+                                              {...props.register3}
                                               className="border-gray-300 border mb-4 rounded py-2 text-sm outline-none resize-none px-3 focus:border focus:border-indigo-700"
                                               rows={8} id="message" defaultValue={""}/>
                                 </div>
@@ -194,16 +213,16 @@ function ContactUsForm() {
                                     provided).
                                 </p>
 
-                                <div className='py-2'>
+                                <div className="py-2">
                                     <ReCAPTCHA
-                                        sitekey={siteKey}
-                                        onChange={onChange}
+                                        sitekey={props.sitekey}
+                                        onChange={props.onChange}
                                     />
 
                                 </div>
-                                <div className='py-4'>
+                                <div className="py-4">
                                     <button type="submit"
-                                            className={captchaIsDone ? "focus:outline-none bg-primaryBlue" +
+                                            className={props.captchaIsDone ? "focus:outline-none bg-primaryBlue" +
                                                 " transition duration-150 ease-in-out hover:bg-indigo-600 rounded" +
                                                 " text-white px-8 py-3 text-sm leading-6" : "focus:outline-none" +
                                                 " bg-primaryBlue transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-3 text-sm leading-6 opacity-50 cursor-not-allowed"}>
