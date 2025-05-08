@@ -6,7 +6,7 @@ const nextConfig = {
     },
 
     images: {
-        domains: ["res.cloudinary.com", "www.wordpress.innovationsgp.com"]
+        domains: ["res.cloudinary.com", "www.wordpress.innovationsgp.com", "www.staging.innovationsgp.com", "www.innovationsgp.com"]
     },
     eslint: {
         // Warning: This allows production builds to successfully complete even if
