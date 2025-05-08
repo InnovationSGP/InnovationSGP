@@ -6,8 +6,8 @@ import { useMemo } from "react";
 export function createApolloClient() {
   return new ApolloClient({
     link: new HttpLink({
-      uri: "https://3.13.23.243/graphql",
-      credentials: "include",
+       uri: "https://www.wordpress.innovationsgp.com/graphql",
+      credentials: "same-origin",
     }),
     cache: new InMemoryCache(),
     defaultOptions: {
